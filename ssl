@@ -1,0 +1,37 @@
+
+
+RewriteEngine On
+
+AddDefaultCharset UTF-8
+ServerSignature Off
+Options -Indexes
+FileETag none
+
+RewriteCond %{SERVER_PORT} 80
+
+RewriteCond %{HTTP_HOST} ^(www\.)?knewtonetechnoschool\.com
+RewriteRule ^(.*)$ https://www.knewtonetechnoschool.com/$1 [R=301,L]
+
+
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteRule ^(.*)$ http://www.knewtonetechnoschool.com/$1 [L,R=301]
+
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://www.knewtonetechnoschool.com/$1 [R=301,L] 
+
+
+RewriteCond %{THE_REQUEST} ^.*/index.php
+RewriteRule ^(.*)index.php$ www.knewtonetechnoschool.com/$1 [R=301,L]
+
+
+  
+RewriteCond $1 !^(index\.php|(.*)\.swf|forums|images|css|downloads|jquery|js|robots\.txt|favicon\.ico)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ ./index.php?$1 [L,QSA]
+ErrorDocument 404 /404.php
+
+
+
+
+also changge in cofig
